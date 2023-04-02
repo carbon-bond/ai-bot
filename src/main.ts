@@ -3,11 +3,16 @@ import bodyParser from 'body-parser';
 import crypto from 'crypto';
 import morgan from 'morgan';
 import config from 'config';
+import pino from 'pino';
+
+const logger = pino({
+  level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
+});
 
 const port: number = config.get('port');
 const secret: string = config.get('secret');
 const api_key: string = config.get('api_key');
-console.log(`port = ${port}, secret = ${secret}, api_key = ${api_key}`);
+logger.info(`port = ${port}, secret = ${secret}, api_key = ${api_key}`);
 
 const app = express();
 app.use(morgan('short'));

@@ -1,7 +1,10 @@
 {
   "scripts": {
-    "prod": "env NODE_ENV=production ts-node src/main.ts",
+    "start": "env NODE_ENV=production ts-node src/main.ts | pino-pretty",
     "dev": "env NODE_ENV=dev ts-node src/main.ts | pino-pretty"
+  },
+  "engines": {
+    "node": "18.x.x"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

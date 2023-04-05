@@ -3,15 +3,14 @@ import bodyParser from 'body-parser';
 import crypto from 'crypto';
 import morgan from 'morgan';
 import config from 'config';
-import pino from 'pino';
 import { API_FETCHER } from './fetcher';
 import { webhook_type } from './api/';
+import { logger } from './logger';
 
-const logger = pino({
-  level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
-});
+const port: number = (process.env.PORT ?
+  parseInt(process.env.PORT) :
+  config.get('port'));
 
-const port: number = config.get('port');
 const secret: string = config.get('secret');
 
 const app = express();

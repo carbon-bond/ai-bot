@@ -1,6 +1,7 @@
 /// <reference lib="dom" />
 import { api_trait } from './api/';
 import config from 'config';
+import { logger } from './logger';
 
 const api_endpoint: string = config.get('api_endpoint');
 const user_name: string = config.get('user_name');

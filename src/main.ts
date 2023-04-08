@@ -1,4 +1,4 @@
-import express, {Request, Response, NextFunction} from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import crypto from 'crypto';
 import morgan from 'morgan';
@@ -15,14 +15,14 @@ const secret: string = config.get('secret');
 
 const app = express();
 app.use(morgan('combined'));
-app.use(bodyParser.text({type: ['json', 'text']}));
+app.use(bodyParser.text({ type: ['json', 'text'] }));
 
 // 中間件：檢查 HMAC
 function verifyHMAC(req: Request, res: Response, next: NextFunction) {
   const hmac = req.headers['hmac']; // 從 header 取得 HMAC
   logger.debug(`hmac = ${hmac}`);
   if (!hmac) {
-    logger.warn('標頭無 HMAC')
+    logger.warn('標頭無 HMAC');
     return res.status(401).send('標頭無 HMAC');
   }
 
@@ -34,7 +34,7 @@ function verifyHMAC(req: Request, res: Response, next: NextFunction) {
     .digest('hex');
 
   if (hmac !== computed_hmac) {
-    logger.warn('HMAC 驗證失敗')
+    logger.warn('HMAC 驗證失敗');
     return res.status(401).send('HMAC 驗證失敗');
   }
 
@@ -47,11 +47,11 @@ app.post('/', verifyHMAC, (req, res) => {
   res.send('HMAC 驗證成功');
   const request: webhook_type.API = JSON.parse(req.body);
   if ('MentionedInComment' in request) {
-    let {
+    const {
       article_id,
       comment_content
     } = request['MentionedInComment'];
-    API_FETCHER.articleQuery.createComment(article_id, '[{\"kind\":\"Paragraph\",\"children\":[{\"text\":\"12345\"}]}]', false)
+    API_FETCHER.articleQuery.createComment(article_id, '[{"kind":"Paragraph","children":[{"text":"12345"}]}]', false)
       .then(data => console.log(JSON.stringify(data, null, 2)))
       .catch(err => console.error(err));
   } else {

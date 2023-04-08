@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "env NODE_ENV=production ts-node src/main.ts | pino-pretty",
-    "dev": "env NODE_ENV=dev ts-node src/main.ts | pino-pretty"
+    "dev": "env NODE_ENV=dev ts-node src/main.ts | pino-pretty",
+    "lint": "eslint ."
   },
   "engines": {
     "node": "18.x.x"
@@ -21,8 +22,11 @@
     "@types/morgan": "^1.9.4",
     "@types/node": "^18.15.11",
     "@types/pino": "^7.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "eslint": "^8.38.0",
     "pino-pretty": "^10.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.4"
   }
 }

@@ -9,6 +9,6 @@ const config: Config = {
 
     user_name: 'a',
     password: 'a'
-}
+};
 
 module.exports = config;

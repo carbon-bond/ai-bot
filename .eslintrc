@@ -1,0 +1,32 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["src/api/"],
+  "rules": {
+    "keyword-spacing": ["error"],
+    "guard-for-in": ["error"],
+    "no-var": ["error"],
+    "no-trailing-spaces": ["error"],
+    "semi": ["error", "always"],
+    "curly": ["error"],
+    /* 沒用到的變數需要符合以 _ 開頭的命名規範 */
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "args": "all",
+        "varsIgnorePattern": "^_.*",
+        "argsIgnorePattern": "^_.*"
+      }
+    ],
+  }
+}

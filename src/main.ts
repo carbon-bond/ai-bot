@@ -3,9 +3,9 @@ import bodyParser from 'body-parser';
 import crypto from 'crypto';
 import morgan from 'morgan';
 import config from 'config';
-import { API_FETCHER } from './fetcher';
 import { webhook_type } from './api/';
 import { logger } from './logger';
+import { chatgptReply } from './bots/chatgpt';
 
 const port: number = (process.env.PORT ?
   parseInt(process.env.PORT) :
@@ -51,9 +51,9 @@ app.post('/', verifyHMAC, (req, res) => {
       article_id,
       comment_content
     } = request['MentionedInComment'];
-    API_FETCHER.articleQuery.createComment(article_id, '[{"kind":"Paragraph","children":[{"text":"12345"}]}]', false)
-      .then(data => console.log(JSON.stringify(data, null, 2)))
-      .catch(err => console.error(err));
+
+    chatgptReply(article_id, comment_content.trim());
+
   } else {
     throw new Error(`未知的 webhook: ${req.body}`);
   }

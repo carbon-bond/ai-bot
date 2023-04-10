@@ -5,3 +5,9 @@
 ```
 ln -s $CARBONBOND/frontend/lib/api api
 ```
+
+## 佈署
+
+```
+gcloud app deploy
+```
